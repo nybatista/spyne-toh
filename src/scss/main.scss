@@ -1,5 +1,12 @@
 @import "01-vendors/normalize.css";
 @import "02-variables/mixins.scss";
+@import "03-components/app";
+@import "03-components/dashboard";
+@import "03-components/heroes";
+@import "03-components/heroes-details";
+@import "03-components/heroes-search";
+@import "03-components/messages";
+
 
 body {
   font-family: sans-serif;
