@@ -1,11 +1,13 @@
 import {ViewStream} from 'spyne';
+import {SpyneTohTraits} from 'traits/spyne-toh-traits';
 
 export class AppView extends ViewStream {
 
   constructor(props = {}) {
     props.tagName='main';
-    props.id='app-main';
+    props.id='app-root';
     props.class='main';
+    props.template = require('./components/templates/app.component.html');
     super(props);
   }
 
@@ -17,22 +19,15 @@ export class AppView extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+        ['a', 'click']
+    ];
   }
 
-  addHelloWorld(e){
-    const helloWorldView = new ViewStream({
-      tagName: 'h2',
-      "style": "color:#1F2933; padding: 2rem; font-family:sans-serif;",
-      data: "Spyne — Tour of Heroes"
-    });
 
-    this.appendView(helloWorldView);
-  }
 
 
   onRendered() {
-    this.addHelloWorld();
   }
 
 }
