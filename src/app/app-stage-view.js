@@ -11,20 +11,21 @@ export class AppStageView extends ViewStream {
 
     addActionListeners() {
         // return nexted array(s)
-        return [];
+        return [
+          ['CHANNEL_TOH_ROUTE_EVENT', "toh$OnRouteChangeEvent"]
+        ];
     }
 
     broadcastEvents() {
         // return nexted array(s)
         return [
-            ['CHANNEL_TOH_ROUTE_EVENT', "toh$OnRouteChangeEvent"]
 
         ];
 
     }
 
     onRendered() {
-        this.addChannel("CHANNEL_ROUTE");
+        this.addChannel("CHANNEL_TOH");
 
     }
 

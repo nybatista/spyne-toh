@@ -25,14 +25,21 @@ export class SpyneTohTraits extends SpyneTrait {
   }
 
   static toh$OnRouteChangeEvent(e){
+    const {payload} = e;
+    const {pageId, id, heroesArr} = e.payload;
 
     const pageIdHash = {
-
-
+      "dashboard" : DashboardView,
+      "detail" : HeroDetailView,
+      "heroes" : HeroesView
     }
 
-    const {pageId, id} = e.payload;
+    const PageClass = pageIdHash[pageId] || Page_404View;
+
     console.log("page id ",{pageId, id},e);
+    this.appendView(new PageClass({
+      data: payload
+    }));
 
   }
 

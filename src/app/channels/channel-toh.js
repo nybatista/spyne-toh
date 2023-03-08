@@ -6,7 +6,7 @@ export class ChannelToh extends Channel{
 
   constructor(name, props={}) {
     name="CHANNEL_TOH";
-    props.sendCachedPayload = false;
+    props.sendCachedPayload = true;
     props.traits = [SpyneTohTraits];
 
     super(name, props);

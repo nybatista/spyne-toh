@@ -1,5 +1,6 @@
 import {ViewStream} from 'spyne';
 import {SpyneTohTraits} from 'traits/spyne-toh-traits';
+import {AppStageView} from './app-stage-view';
 
 export class AppView extends ViewStream {
 
@@ -28,6 +29,7 @@ export class AppView extends ViewStream {
 
 
   onRendered() {
+    this.appendView(new AppStageView());
   }
 
 }
