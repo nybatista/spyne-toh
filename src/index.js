@@ -21,8 +21,7 @@ const config = {
       "routes": {
         "routePath": {
           "routeName": "pageId",
-          "home": "^$",
-          "dashboard" : "dashboard",
+          "dashboard" : "^$",
           "heroes" : "heroes",
            "detail": {
             "routePath": {
