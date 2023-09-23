@@ -2,7 +2,8 @@ import'./scss/main.scss';
 import {SpyneApp, Channel} from 'spyne';
 import {AppView} from './app/app-view';
 import {ChannelToh} from 'channels/channel-toh.js';
-
+const R = require('ramda');
+window.R = R;
 
 const config = {
   'debug': true,
