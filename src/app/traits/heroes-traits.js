@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {reject, propEq} from 'ramda';
+import {reject, propEq, difference} from 'ramda';
 import {HEROES} from '../mock-data';
 
 export class HeroesTraits extends SpyneTrait {
@@ -17,7 +17,8 @@ export class HeroesTraits extends SpyneTrait {
   static heroes$CreateDataObj(){
 
     let _heroesObj = HEROES;
-    let _changedSearchHerods = [];
+    let _addedSearchHeros = [];
+
     class HeroesData {
 
 
@@ -32,6 +33,21 @@ export class HeroesTraits extends SpyneTrait {
       removeHero(id){
          reject(propEq(id, 'id'))(_heroesObj);
       }
+
+      searchHero(searchStr){
+        const reducerFn = (acc, o)=>{
+          if (new RegExp(searchStr).test(o.name)===true) {
+            acc.push(o);
+          }
+
+          return acc;
+        }
+        return _heroesObj.reduce(reducerFn, []);
+
+
+      }
+
+
 
 
 

@@ -13,20 +13,14 @@ export class AppView extends ViewStream {
   }
 
   addActionListeners() {
-    // return nexted array(s)
     return [];
   }
 
-
   broadcastEvents() {
-    // return nexted array(s)
     return [
         ['a', 'click']
     ];
   }
-
-
-
 
   onRendered() {
     this.appendView(new AppStageView());
