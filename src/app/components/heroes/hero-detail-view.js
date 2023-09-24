@@ -5,7 +5,9 @@ export class HeroDetailView extends ViewStream {
 
     constructor(props={}) {
       props.id = "hero-detail";
-      props.traits = [SpyneTohTraits]
+      props.traits = [SpyneTohTraits];
+
+      console.log("PROPS DATA IS ",props.data,' -- ',props.data.name);
 
       props.template = require('./templates/hero-detail.component.html')
 

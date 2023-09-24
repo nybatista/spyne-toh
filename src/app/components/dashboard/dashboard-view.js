@@ -20,7 +20,9 @@ export class DashboardView extends ViewStream {
 
     broadcastEvents() {
       // return nexted array(s)
-      return [];
+      return [
+          ['a', 'click']
+      ];
     }
 
     onRendered() {

@@ -11,12 +11,12 @@
 </div>
 
 <ul class="heroes">
-    {{#heroes}}
+    {{#heroesArr}}
   <li>
-    <a data-channel="ROUTE" data-page-id="heroes" data-hero-id="{{heroId}}">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
+    <a data-channel="ROUTE" data-page-id="detail" data-id="{{id}}">
+      <span class="badge">{{id}}</span> {{name}}
     </a>
     <button type="button" class="delete" title="delete hero">x</button>
   </li>
-    {{/heroes}}
+    {{/heroesArr}}
 </ul>

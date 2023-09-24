@@ -1,9 +1,10 @@
 <h2>Top Heroes</h2>
 <div class="heroes-menu">
-    {{#heroes}}
-  <a data-page-id="heroes" data-hero-id="{{hero.id}}">
-      {{hero.name}}
+    {{#heroesArr}}
+  <a data-channel="ROUTE" href="detail/{{id}}" data-page-id="detail" data-id="{{id}}" data-event-prevent-default="true">
+      {{name}}
   </a>
+     {{/heroesArr}}
 </div>
 
 <div class="app-hero-search"></div>

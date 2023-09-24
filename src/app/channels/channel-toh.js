@@ -9,7 +9,7 @@ export class ChannelToh extends Channel{
     name="CHANNEL_TOH";
     props.sendCachedPayload = true;
     props.traits = [SpyneTohTraits, HeroesTraits];
-    props.tourOfHeroesData = HeroesTraits.heroes$CreateDataObj();
+    props.heroesData = HeroesTraits.heroes$CreateDataObj();
 
 
     /**
@@ -32,7 +32,9 @@ export class ChannelToh extends Channel{
   onRouteChangeEvent(e){
     const {routeData} = e.payload;
     const {pageId, id} = routeData;
-    let heroesArr = this.props.tourOfHeroesData.heroes;
+
+    console.log("ROUTE DATA ",{routeData, pageId, id}, e);
+    let heroesArr = this.toh$GetPageData({pageId, id}, this.props.heroesData);
     const payload = Object.assign({}, {pageId, id, heroesArr});
 
     this.sendChannelPayload("CHANNEL_TOH_ROUTE_EVENT", payload);
@@ -43,7 +45,6 @@ export class ChannelToh extends Channel{
 
   onRegistered(){
 
-    this.props.heroesData =
 
     this.getChannel("CHANNEL_ROUTE")
         .subscribe(this.onRouteChangeEvent.bind(this));

@@ -26,7 +26,8 @@ const config = {
           "heroes" : "heroes",
            "detail": {
             "routePath": {
-              "routeName": "id"
+              "routeName": "id",
+              ".12" : "12"
             }
           }
         }

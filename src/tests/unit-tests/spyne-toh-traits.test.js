@@ -12,19 +12,19 @@ describe('should test tour-of-heroes traits', () => {
 
   it('should return data for the heroes page',()=>{
     const spyneData =  HeroesTraits.heroes$CreateDataObj();
-      const pageHeroesData = SpyneTohTraits.toh$GetPageData({type:'heroes'}, spyneData);
+      const pageHeroesData = SpyneTohTraits.toh$GetPageData({pageId:'heroes'}, spyneData);
       expect(pageHeroesData).to.deep.eq(HEROES);
   })
 
   it('should return data for the dashboard page', ()=>{
     const spyneData =  HeroesTraits.heroes$CreateDataObj();
-    const pageDashboardData = SpyneTohTraits.toh$GetPageData({type:'dashboard'}, spyneData);
+    const pageDashboardData = SpyneTohTraits.toh$GetPageData({pageId:'dashboard'}, spyneData);
     expect(pageDashboardData).to.deep.eq([{"id":12,"name":"Dr. Nice"},{"id":13,"name":"Bombasto"},{"id":14,"name":"Celeritas"},{"id":15,"name":"Magneta"}]);
   })
 
   it('should return data for the dedtails page', ()=>{
     const spyneData =  HeroesTraits.heroes$CreateDataObj();
-    const pageDetailsData = SpyneTohTraits.toh$GetPageData({type:'details', id:12}, spyneData);
+    const pageDetailsData = SpyneTohTraits.toh$GetPageData({pageId:'detail', id:12}, spyneData);
     expect(pageDetailsData).to.deep.eq({id: 12, name: 'Dr. Nice'});
   })
 

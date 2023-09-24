@@ -14,16 +14,21 @@ export class SpyneTohTraits extends SpyneTrait {
   }
 
 
-  static toh$GetPageData(pageType={type:"heroes"}, heroesData=this.props.heroesData){
-    const {type, id} = pageType;
-    const {heroes} = heroesData;
+  static toh$GetPageData(pageInfo={pageId:"heroes"}, heroesData=this.props.heroesData){
+    const {pageId, id} = pageInfo;
+    //console.log("get page data ",{pageId, id, heroesData}, typeof heroesData.getTopHeroes)
     const _dataHashObj = {
-      heroes: heroes,
-      dashboard: heroes.slice(0,4),
-      details: heroes.filter(o => o.id === id)[0]
+      heroes: ()=>heroesData.heroes,
+      dashboard: ()=>heroesData.getTopHeroes(),
+      detail: ()=>{
+        const o = heroesData.getHero(id);
+        console.log('o is ',o);
+        o['nameUpperCase'] = String(o.name).toUpperCase();
+        return o;
+      }
     }
 
-    return _dataHashObj[type];
+    return _dataHashObj[pageId]();
   }
 
 
@@ -50,7 +55,7 @@ export class SpyneTohTraits extends SpyneTrait {
 
     const PageClass = pageIdHash[pageId] || Page_404View;
 
-    console.log("page id ",{PageClass,pageId, id},e);
+    //console.log("page id ",{PageClass,pageId, id},e);
     this.appendView(new PageClass({
       data: payload
     }));

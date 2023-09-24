@@ -23,7 +23,12 @@ export class HeroesTraits extends SpyneTrait {
 
 
       getHero(id) {
-        return _heroesArr.filter(o => o.id === id)[0];
+        id = parseInt(id);
+        return clone(_heroesArr.filter(o => o.id === id)[0]);
+      }
+
+      getTopHeroes(){
+        return _heroesArr.slice(0, 4);
       }
 
       addHero(name){

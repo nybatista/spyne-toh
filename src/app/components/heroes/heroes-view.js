@@ -19,7 +19,10 @@ export class HeroesView extends ViewStream {
 
     broadcastEvents() {
       // return nexted array(s)
-      return [];
+      return [
+          ['a', 'click'],
+          ['button', 'click']
+      ];
     }
 
     onRendered() {
