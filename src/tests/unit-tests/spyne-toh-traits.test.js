@@ -30,11 +30,25 @@ describe('should test tour-of-heroes traits', () => {
 
 });
 
+
+/**
+ * TODO: fetched heroes (page heroes or dashboard)
+ * fetched hero id=#
+ * updated hero id=#
+ * deleted hero id=#
+ * added hero w/ id=#
+ *
+ * found heroes matching "a"
+ * no heroes matching "a3"
+ *
+ *
+ * */
+
 describe('it should create message for any event', ()=>{
 
   it('should return fetched msg ',()=>{
     const heroesPageMsg = SpyneTohTraits.toh$GenerateMessage();
-    expect(heroesPageMsg).to.eq('HeroService: fetched hero')
+    expect(heroesPageMsg).to.eq('HeroService: fetched heroes')
   });
 
   it('should return updated msg ',()=>{

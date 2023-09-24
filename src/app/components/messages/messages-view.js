@@ -1,4 +1,4 @@
-import {ViewStream} from 'spyne';
+import {ViewStream, DomElement} from 'spyne';
 
 export class MessagesView extends ViewStream {
 
@@ -11,7 +11,17 @@ export class MessagesView extends ViewStream {
 
     addActionListeners() {
         // return nexted array(s)
-        return [];
+        return [
+            ["CHANNEL_TOH_ROUTE_EVENT", "onChannelRoute"]
+        ];
+    }
+
+    onChannelRoute(e){
+      const {msg} = e.payload;
+
+      this.props.el$("#msg-holder").el.appendChild(new DomElement({data: msg}).render());
+
+      console.log("channel route is ",e);
     }
 
     broadcastEvents() {
@@ -20,6 +30,8 @@ export class MessagesView extends ViewStream {
     }
 
     onRendered() {
+
+      this.addChannel("CHANNEL_TOH");
 
     }
 
