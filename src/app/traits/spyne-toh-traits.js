@@ -22,7 +22,6 @@ export class SpyneTohTraits extends SpyneTrait {
       dashboard: ()=>heroesData.getTopHeroes(),
       detail: ()=>{
         const o = heroesData.getHero(id);
-        console.log('o is ',o);
         o['nameUpperCase'] = String(o.name).toUpperCase();
         return o;
       }
@@ -30,6 +29,20 @@ export class SpyneTohTraits extends SpyneTrait {
 
     return _dataHashObj[pageId]();
   }
+
+  static toh$GenerateMessage(msgVals={eventType:'fetch'}, data){
+    const {eventType, id} = msgVals;
+
+    const pastTense = s => s.replace(/^(\w+?)(e*?)$/, "$1ed")
+
+    const searchPrefix = ()=>data.heroesArr.length>=1 ? "found" : "no"
+    const idStr = id===undefined ? '' : eventType === 'add' ? ` w/ id=${id}` : ` id=${id}`;
+    const msgType =  eventType === 'search' ? `${searchPrefix()} heroes matching "${data.searchStr}"` : `${pastTense(eventType)} hero${idStr}`;
+
+    return `HeroService: ${msgType}`;
+
+  }
+
 
 
 

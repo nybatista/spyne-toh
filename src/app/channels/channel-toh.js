@@ -12,18 +12,6 @@ export class ChannelToh extends Channel{
     props.heroesData = HeroesTraits.heroes$CreateDataObj();
 
 
-    /**
-     * TODO: fetched heroes (page heroes or dashboard)
-     * fetched hero id=#
-     * updated hero id=#
-     * deleted hero id=#
-     * added hero w/ id=#
-     *
-     * found heroes matching "a"
-     * no heroes matching "a3"
-     *
-     *
-     * */
 
     super(name, props);
   }
@@ -35,6 +23,7 @@ export class ChannelToh extends Channel{
 
     console.log("ROUTE DATA ",{routeData, pageId, id}, e);
     let heroesArr = this.toh$GetPageData({pageId, id}, this.props.heroesData);
+    const msg = this.toh$GenerateMessage({eventType:'route', id});
     const payload = Object.assign({}, {pageId, id, heroesArr});
 
     this.sendChannelPayload("CHANNEL_TOH_ROUTE_EVENT", payload);
