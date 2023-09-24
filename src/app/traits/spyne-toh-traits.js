@@ -14,6 +14,20 @@ export class SpyneTohTraits extends SpyneTrait {
   }
 
 
+  static toh$GetPageData(pageType={type:"heroes"}, heroesData=this.props.heroesData){
+    const {type, id} = pageType;
+    const {heroes} = heroesData;
+    const _dataHashObj = {
+      heroes: heroes,
+      dashboard: heroes.slice(0,4),
+      details: heroes.filter(o => o.id === id)[0]
+    }
+
+    return _dataHashObj[type];
+  }
+
+
+
   static toh$AddPageTraits(e){
     this.addChannel("CHANNEL_TOH", true);
 

@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {reject, propEq, difference} from 'ramda';
+import {reject, clone, propEq, difference, compose, inc, last, pluck} from 'ramda';
 import {HEROES} from '../mock-data';
 
 export class HeroesTraits extends SpyneTrait {
@@ -16,22 +16,27 @@ export class HeroesTraits extends SpyneTrait {
 
   static heroes$CreateDataObj(){
 
-    let _heroesObj = HEROES;
-    let _addedSearchHeros = [];
+    let _heroesArr = clone(HEROES);
+    let _prevSearchedHeroes = [];
 
     class HeroesData {
 
 
       getHero(id) {
-        return _heroesObj.filter(o => o.id === id)[0];
+        return _heroesArr.filter(o => o.id === id)[0];
+      }
+
+      addHero(name){
+        const id = compose(inc, last, pluck(['id']))(_heroesArr);
+        _heroesArr.push({id,name});
       }
 
       renameHero(id, val){
-        _heroesObj.filter(o => o.id === id)[0].name = val;
+        _heroesArr.filter(o => o.id === id)[0].name = val;
       }
 
       removeHero(id){
-         reject(propEq(id, 'id'))(_heroesObj);
+         _heroesArr = reject(propEq(id, 'id'))(_heroesArr);
       }
 
       searchHero(searchStr){
@@ -42,8 +47,12 @@ export class HeroesTraits extends SpyneTrait {
 
           return acc;
         }
-        return _heroesObj.reduce(reducerFn, []);
+        const searchItems = _heroesArr.reduce(reducerFn, []);
 
+        const results = clone(difference(searchItems, _prevSearchedHeroes));
+        _prevSearchedHeroes = results;
+
+        return results;
 
       }
 
@@ -53,7 +62,7 @@ export class HeroesTraits extends SpyneTrait {
 
 
       get heroes(){
-        return _heroesObj;
+        return _heroesArr;
       }
 
 
@@ -64,7 +73,7 @@ export class HeroesTraits extends SpyneTrait {
 
 
 
-
+      return new HeroesData();
 
 
   }
