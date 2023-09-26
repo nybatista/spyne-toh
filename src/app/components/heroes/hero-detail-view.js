@@ -1,4 +1,4 @@
-import {ViewStream} from 'spyne';
+import {ViewStream, ChannelPayloadFilter} from 'spyne';
 import {SpyneTohTraits} from 'traits/spyne-toh-traits';
 
 export class HeroDetailView extends ViewStream {
@@ -16,18 +16,31 @@ export class HeroDetailView extends ViewStream {
 
     addActionListeners() {
       // return nexted array(s)
+
+
       const actionListenersArr = [];
       actionListenersArr.push(this.toh$AddRouteActionListener());
+
+      actionListenersArr.push(["CHANNEL_UI_CLICK_EVENT", "onGoBack", "#go-back"])
       return actionListenersArr;
+    }
+
+    onGoBack(e){
+      window.history.go(-1);
+      console.log('go back event ',e);
     }
 
     broadcastEvents() {
       // return nexted array(s)
-      return [];
+      return [
+          ['button', 'click']
+      ];
     }
 
     onRendered() {
       this.toh$AddPageTraits();
+
+      this.addChannel("CHANNEL_UI");
 
     }
 

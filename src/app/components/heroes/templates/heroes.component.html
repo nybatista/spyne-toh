@@ -5,7 +5,7 @@
   <input id="new-hero"/>
 
   <!-- (click) passes input value to add() and then clears the input -->
-  <button type="button" class="add-button">
+  <button type="button" class="add-button btn-toh" data-event-type="add" >
     Add hero
   </button>
 </div>
@@ -16,7 +16,7 @@
     <a data-channel="ROUTE" data-page-id="detail" data-id="{{id}}">
       <span class="badge">{{id}}</span> {{name}}
     </a>
-    <button type="button" class="delete" title="delete hero">x</button>
+    <button type="button" class="delete btn-toh" data-event-type="delete" data-id="{{id}}"  title="delete hero">x</button>
   </li>
     {{/heroesArr}}
 </ul>

@@ -1,5 +1,6 @@
 import {ViewStream} from 'spyne';
 import {SpyneTohTraits} from 'traits/spyne-toh-traits';
+import {DashboardHeroSearchView} from 'components/dashboard/dashboard-hero-search-view';
 
 export class DashboardView extends ViewStream {
 
@@ -27,6 +28,7 @@ export class DashboardView extends ViewStream {
 
     onRendered() {
       this.toh$AddPageTraits();
+      this.appendView(new DashboardHeroSearchView(), "#app-hero-search")
 
     }
 

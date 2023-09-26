@@ -1,4 +1,4 @@
-import {ViewStream, DomElement} from 'spyne';
+import {ViewStream, DomElement, ChannelPayloadFilter} from 'spyne';
 
 export class MessagesView extends ViewStream {
 
@@ -12,26 +12,36 @@ export class MessagesView extends ViewStream {
     addActionListeners() {
         // return nexted array(s)
         return [
-            ["CHANNEL_TOH_ROUTE_EVENT", "onChannelRoute"]
+            ["CHANNEL_TOH_ROUTE_EVENT", "onChannelRoute"],
+            ["CHANNEL_UI_CLICK_EVENT", "onClearMsgs", ".clear"]
         ];
+    }
+
+    onClearMsgs(e){
+
+      this.props.msgHolder$.el.innerHTML = "";
+
     }
 
     onChannelRoute(e){
       const {msg} = e.payload;
 
-      this.props.el$("#msg-holder").el.appendChild(new DomElement({data: msg}).render());
+      this.props.msgHolder$.el.appendChild(new DomElement({data: msg}).render());
 
       console.log("channel route is ",e);
     }
 
     broadcastEvents() {
         // return nexted array(s)
-        return [];
+        return [
+            ['.clear', 'click']
+        ];
     }
 
     onRendered() {
-
+      this.props.msgHolder$ = this.props.el$("#msg-holder");
       this.addChannel("CHANNEL_TOH");
+      this.addChannel("CHANNEL_UI");
 
     }
 

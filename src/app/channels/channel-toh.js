@@ -1,5 +1,5 @@
 import {Subject} from 'rxjs';
-import {Channel} from 'spyne';
+import {Channel, ChannelPayloadFilter} from 'spyne';
 import {SpyneTohTraits} from 'traits/spyne-toh-traits';
 import {HeroesTraits} from 'traits/heroes-traits';
 
@@ -37,6 +37,31 @@ export class ChannelToh extends Channel{
 
     this.getChannel("CHANNEL_ROUTE")
         .subscribe(this.onRouteChangeEvent.bind(this));
+
+
+    const onTOHBtn = (e)=>{
+      const {eventType, id} = e.payload;
+      const getParentInputVal = ()=>e.srcElement.el.parentElement.querySelector('input').value;
+
+      const eventTypeHash = {
+        "add"    : ()=> getParentInputVal(),
+        "update" : ()=>getParentInputVal(),
+        "search" : ()=>e.srcElement.el.value,
+        "delete" : ()=>e.payload.id
+      }
+
+      const eventVal = eventTypeHash[eventType]();
+
+
+      console.log({eventType,eventVal,id, e});
+
+
+    }
+
+    const pl = new ChannelPayloadFilter({selector: [".btn-toh", ".input-toh"]})
+
+    this.getChannel("CHANNEL_UI", pl)
+        .subscribe(onTOHBtn);
 
 
   }
