@@ -20,7 +20,7 @@ describe('should create a Heroes Object with various controls ',()=>{
 
   it('should add a new Hero',()=>{
     const heroesData = TohDataTraits.tohData$CreateDataObj();
-    heroesData.addHero('ButterMan');
+    heroesData.add('ButterMan');
     expect(heroesData.getHero(21)).to.deep.eq({id: 21, name: 'ButterMan'});
 
   })
@@ -32,23 +32,23 @@ describe('should create a Heroes Object with various controls ',()=>{
 
   it('should rename a specific hero by id',()=>{
     const heroesData = TohDataTraits.tohData$CreateDataObj();
-    heroesData.renameHero(12, 'New Name');
+    heroesData.update('New Name', 12);
     expect(heroesData.getHero(12)).to.deep.eq({id: 12, name: 'New Name'});
   })
 
   it('should remove a specific hero by id',()=>{
     const heroesData = TohDataTraits.tohData$CreateDataObj();
-    heroesData.removeHero(12);
+    heroesData.delete(12);
     expect(heroesData.getHero(12)).to.be.undefined;
   })
 
 
   it('should search heroes by string',()=>{
     const heroesData = TohDataTraits.tohData$CreateDataObj();
-    const search1 = heroesData.searchHero('ast');
-    const search2 = heroesData.searchHero('as');
-    const search3 = heroesData.searchHero('ast');
-    const search4 = heroesData.searchHero('a');
+    const search1 = heroesData.search('ast');
+    const search2 = heroesData.search('as');
+    const search3 = heroesData.search('ast');
+    const search4 = heroesData.search('a');
 
 /*    console.log('ast search 1 is ',search1);
     console.log('as search  2 is ',search2);

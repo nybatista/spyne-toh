@@ -61,20 +61,23 @@ export class TohDataTraits extends SpyneTrait {
         return _heroesArr.slice(0, 4);
       }
 
-      addHero(name){
+      add(name){
         const id = compose(inc, last, pluck(['id']))(_heroesArr);
-        _heroesArr.push({id,name});
+        const newHero = {id, name};
+        _heroesArr.push(newHero);
       }
 
-      renameHero(id, val){
+      update(val, id){
         _heroesArr.filter(o => o.id === id)[0].name = val;
+        return this.getHero(id);
       }
 
-      removeHero(id){
+      delete(id){
          _heroesArr = reject(propEq(id, 'id'))(_heroesArr);
+         return id;
       }
 
-      searchHero(searchStr){
+      search(searchStr){
         const reducerFn = (acc, o)=>{
           if (new RegExp(searchStr).test(o.name)===true) {
             acc.push(o);
