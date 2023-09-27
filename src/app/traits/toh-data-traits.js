@@ -65,11 +65,13 @@ export class TohDataTraits extends SpyneTrait {
         const id = compose(inc, last, pluck(['id']))(_heroesArr);
         const newHero = {id, name};
         _heroesArr.push(newHero);
-        return newHero;
+        return clone(newHero);
       }
 
       update(val, id){
+
         const obj = _heroesArr.filter(o => o.id === parseInt(id))[0]
+        console.log("UPDATE ",{id, val, obj}, _heroesArr)
 
         //console.log('heroes arr ', {val,id,_heroesArr, obj}, Object.isExtensible(obj), Object.isFrozen(obj));
 

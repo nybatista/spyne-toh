@@ -13,7 +13,6 @@ export class PageHeroesView extends ViewStream {
     addActionListeners() {
       // return nexted array(s)
       const actionListenersArr = [
-        ["CHANNEL_TOH_DELETE_EVENT", "tohPage$DeleteHero" ],
         ["CHANNEL_TOH_ADD_EVENT", "tohPage$AddHeroItem" ]
       ];
       actionListenersArr.push(this.tohPage$AddRouteActionListener());
@@ -23,7 +22,6 @@ export class PageHeroesView extends ViewStream {
     broadcastEvents() {
       // return nexted array(s)
       return [
-          ['a', 'click'],
           ['button', 'click']
       ];
     }
