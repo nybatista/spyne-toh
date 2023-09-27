@@ -14,7 +14,7 @@ export class Page_404View extends ViewStream {
     addActionListeners() {
         // return nexted array(s)
        const actionListenersArr = [];
-       actionListenersArr.push(this.toh$PageAddRouteActionListener());
+       actionListenersArr.push(this.tohPage$AddRouteActionListener());
         return actionListenersArr;
     }
 
@@ -24,7 +24,7 @@ export class Page_404View extends ViewStream {
     }
 
     onRendered() {
-      this.toh$PageAddPageTraits();
+      this.tohPage$AddPageTraits();
 
     }
 

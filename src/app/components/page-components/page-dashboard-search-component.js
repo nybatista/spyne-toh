@@ -1,10 +1,10 @@
 import {ViewStream} from 'spyne';
 
-export class DashboardHeroSearchView extends ViewStream {
+export class PageDashboardSearchComponent extends ViewStream {
 
     constructor(props={}) {
         props.id = "search-component";
-        props.template = require('./templates/dashboard-hero-search.component.html');
+        props.template = require('./templates/page-dashboard-search.component.html');
 
         super(props);
     }

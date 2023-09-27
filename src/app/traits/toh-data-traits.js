@@ -5,16 +5,12 @@ import {HEROES} from '../mock-data';
 export class TohDataTraits extends SpyneTrait {
 
   constructor(context){
-    let traitPrefix = "heroes$";
+    let traitPrefix = "tohData$";
 
     super(context, traitPrefix);
   }
 
-  static heroes$HelloWorld(){
-    return "Hello World";
-  }
-
-  static heroes$CreateDataObj(){
+  static tohData$CreateDataObj(){
 
     let _heroesArr = clone(HEROES);
     let _prevSearchedHeroes = [];

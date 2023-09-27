@@ -9,7 +9,7 @@ export class ChannelToh extends Channel{
     name="CHANNEL_TOH";
     props.sendCachedPayload = true;
     props.traits = [TohPageTraits, TohDataTraits];
-    props.heroesData = TohDataTraits.heroes$CreateDataObj();
+    props.heroesData = TohDataTraits.tohData$CreateDataObj();
 
 
 
@@ -22,8 +22,9 @@ export class ChannelToh extends Channel{
     const {pageId, id} = routeData;
 
     console.log("ROUTE DATA ",{routeData, pageId, id}, e);
-    let heroesArr = this.toh$PageGetPageData({pageId, id}, this.props.heroesData);
-    const msg = this.toh$PageGenerateMessage({eventType:'fetch', id});
+    let heroesArr = this.tohPage$GetPageData({pageId, id},
+        this.props.heroesData);
+    const msg = this.tohPage$GenerateMessage({eventType: 'fetch', id});
     const payload = Object.assign({}, {pageId, id, msg, heroesArr});
 
     this.sendChannelPayload("CHANNEL_TOH_ROUTE_EVENT", payload);

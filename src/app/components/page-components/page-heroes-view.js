@@ -1,19 +1,19 @@
 import {ViewStream} from 'spyne';
 import {TohPageTraits} from 'traits/toh-page-traits';
 
-export class HeroesView extends ViewStream {
+export class PageHeroesView extends ViewStream {
 
     constructor(props={}) {
         props.id = "heroes";
         props.traits = [TohPageTraits];
-        props.template = require('./templates/heroes.component.html');
+        props.template = require('./templates/page-heroes.component.html');
         super(props);
     }
 
     addActionListeners() {
       // return nexted array(s)
       const actionListenersArr = [];
-      actionListenersArr.push(this.toh$PageAddRouteActionListener());
+      actionListenersArr.push(this.tohPage$AddRouteActionListener());
       return actionListenersArr;
     }
 
@@ -26,7 +26,7 @@ export class HeroesView extends ViewStream {
     }
 
     onRendered() {
-      this.toh$PageAddPageTraits();
+      this.tohPage$AddPageTraits();
 
     }
 

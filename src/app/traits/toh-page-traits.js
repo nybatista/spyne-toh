@@ -1,20 +1,21 @@
 import {SpyneTrait} from 'spyne';
 import {HEROES} from '../mock-data';
-import {DashboardView} from 'components/dashboard/dashboard-view';
-import {HeroesView} from 'components/heroes/heroes-view';
-import {HeroDetailView} from 'components/heroes/hero-detail-view';
-import {Page_404View} from 'components/page-404-view';
+import {PageDashboardView} from 'components/page-components/page-dashboard-view';
+import {PageHeroesView} from 'components/page-components/page-heroes-view';
+import {PageHeroView} from 'components/page-components/page-hero-view';
+import {Page_404View} from 'components/page-components/page-404-view';
 
 export class TohPageTraits extends SpyneTrait {
 
   constructor(context){
-    let traitPrefix = "toh$Page";
+    let traitPrefix = "tohPage$";
 
     super(context, traitPrefix);
   }
 
 
-  static toh$PageGetPageData(pageInfo={pageId:"heroes"}, heroesData=this.props.heroesData){
+  static tohPage$GetPageData(
+      pageInfo = {pageId: 'heroes'}, heroesData = this.props.heroesData){
     const {pageId, id} = pageInfo;
     //console.log("get page data ",{pageId, id, heroesData}, typeof heroesData.getTopHeroes)
     const _dataHashObj = {
@@ -30,7 +31,7 @@ export class TohPageTraits extends SpyneTrait {
     return _dataHashObj[pageId]();
   }
 
-  static toh$PageGenerateMessage(msgVals = {eventType: 'fetch'}, data){
+  static tohPage$GenerateMessage(msgVals = {eventType: 'fetch'}, data){
     const {eventType, id} = msgVals;
     const heroStr = id!==undefined ? "hero" : "heroes";
     const pastTense = s => s.replace(/^(\w+?)(e*?)$/, "$1ed")
@@ -46,24 +47,24 @@ export class TohPageTraits extends SpyneTrait {
 
 
 
-  static toh$PageAddPageTraits(e){
+  static tohPage$AddPageTraits(e){
     this.addChannel("CHANNEL_TOH", true);
 
   }
 
-  static toh$PageAddRouteActionListener(){
+  static tohPage$AddRouteActionListener(){
     return ["CHANNEL_TOH_ROUTE_EVENT", "disposeViewStream"]
 
   }
 
-  static toh$PageOnRouteChangeEvent(e){
+  static tohPage$OnRouteChangeEvent(e){
     const {payload} = e;
     const {pageId, id, heroesArr} = e.payload;
 
     const pageIdHash = {
-      "dashboard" : DashboardView,
-      "detail" : HeroDetailView,
-      "heroes" : HeroesView
+      "dashboard" : PageDashboardView,
+      "detail" : PageHeroView,
+      "heroes" : PageHeroesView
     }
 
     const PageClass = pageIdHash[pageId] || Page_404View;
@@ -76,7 +77,7 @@ export class TohPageTraits extends SpyneTrait {
   }
 
 
-  static toh$PageGetHeroesData(){
+  static tohPage$GetHeroesData(){
    return HEROES;
   }
 

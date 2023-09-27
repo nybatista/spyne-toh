@@ -12,38 +12,38 @@ describe('should test Hero Traits', () => {
 describe('should create a Heroes Object with various controls ',()=>{
 
   it('should return a Heroes Data object',()=>{
-    const heroesData = TohDataTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.tohData$CreateDataObj();
     expect(heroesData).to.be.a('object');
 
   })
 
   it('should add a new Hero',()=>{
-    const heroesData = TohDataTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.tohData$CreateDataObj();
     heroesData.addHero('ButterMan');
     expect(heroesData.getHero(21)).to.deep.eq({id: 21, name: 'ButterMan'});
 
   })
 
   it('should return a specific hero by id ',()=>{
-    const heroesData = TohDataTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.tohData$CreateDataObj();
     expect(heroesData.getHero(12)).to.deep.eq({id: 12, name: 'Dr. Nice'});
   })
 
   it('should rename a specific hero by id',()=>{
-    const heroesData = TohDataTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.tohData$CreateDataObj();
     heroesData.renameHero(12, 'New Name');
     expect(heroesData.getHero(12)).to.deep.eq({id: 12, name: 'New Name'});
   })
 
   it('should remove a specific hero by id',()=>{
-    const heroesData = TohDataTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.tohData$CreateDataObj();
     heroesData.removeHero(12);
     expect(heroesData.getHero(12)).to.be.undefined;
   })
 
 
   it('should search heroes by string',()=>{
-    const heroesData = TohDataTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.tohData$CreateDataObj();
     const search1 = heroesData.searchHero('ast');
     const search2 = heroesData.searchHero('as');
     const search3 = heroesData.searchHero('ast');
