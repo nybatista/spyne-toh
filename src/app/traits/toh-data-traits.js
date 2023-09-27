@@ -20,6 +20,8 @@ export class TohDataTraits extends SpyneTrait {
       dashboard: ()=>heroesData.getTopHeroes(),
       detail: ()=>{
         const o = heroesData.getHero(id);
+
+        console.log("ID DETAIL ",{pageId, id, heroesData,o});
         o['nameUpperCase'] = String(o.name).toUpperCase();
         return o;
       }
@@ -71,10 +73,6 @@ export class TohDataTraits extends SpyneTrait {
       update(val, id){
 
         const obj = _heroesArr.filter(o => o.id === parseInt(id))[0]
-        console.log("UPDATE ",{id, val, obj}, _heroesArr)
-
-        //console.log('heroes arr ', {val,id,_heroesArr, obj}, Object.isExtensible(obj), Object.isFrozen(obj));
-
          obj.name = val;
         return this.getHero(id);
       }
@@ -85,6 +83,8 @@ export class TohDataTraits extends SpyneTrait {
       }
 
       search(searchStr){
+
+
         const reducerFn = (acc, o)=>{
           if (new RegExp(searchStr).test(o.name)===true) {
             acc.push(o);
@@ -92,10 +92,10 @@ export class TohDataTraits extends SpyneTrait {
 
           return acc;
         }
-        const searchItems = _heroesArr.reduce(reducerFn, []);
+        const searchItems = searchStr === "" ? [] : _heroesArr.reduce(reducerFn, []);
 
         const foundHeroesArr = clone(difference(searchItems, _prevSearchedHeroes));
-        _prevSearchedHeroes = foundHeroesArr;
+        _prevSearchedHeroes = searchItems;
 
         return {foundHeroesArr, searchStr};
 

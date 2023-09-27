@@ -7,7 +7,6 @@ export class PageHeroView extends ViewStream {
       props.id = "hero-detail";
       props.traits = [TohPageTraits];
 
-      console.log("PROPS DATA IS ",props.data,' -- ',props.data.name);
 
       props.template = require('./templates/page-hero-detail.component.html')
 
@@ -19,7 +18,7 @@ export class PageHeroView extends ViewStream {
 
 
       const actionListenersArr = [
-        ["CHANNEL_UI_CLICK_EVENT", "onGoBack"],
+        ["CHANNEL_UI_CLICK_EVENT", "tohPage$UpdateSave", "#go-back"],
         ["CHANNEL_UI_INPUT_EVENT", "tohPage$UpdateDetailsHeroLabel"],
         ["CHANNEL_TOH_UPDATE_EVENT", "tohPage$UpdateSave" ]
       ];
@@ -29,7 +28,6 @@ export class PageHeroView extends ViewStream {
 
     onGoBack(e){
       window.history.go(-1);
-      console.log('go back event ',e);
     }
 
     broadcastEvents() {

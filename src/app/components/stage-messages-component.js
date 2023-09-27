@@ -28,7 +28,6 @@ export class StageMessagesComponent extends ViewStream {
 
       this.props.msgHolder$.el.appendChild(new DomElement({data: msg}).render());
 
-      console.log("channel route is ",e);
     }
 
     broadcastEvents() {

@@ -20,7 +20,6 @@ export class PageDashboardSearchComponent extends ViewStream {
 
     onSearchEvent(e){
       const {foundHeroesArr} = e.payload;
-      console.log("found heroes arr is ",foundHeroesArr);
 
        const addItem = (data)=>this.appendView(new PageDashboardSearchItem({data}), '.search-result');
        foundHeroesArr.forEach(addItem);

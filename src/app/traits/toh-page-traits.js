@@ -24,7 +24,6 @@ export class TohPageTraits extends SpyneTrait {
   static tohPage$DeleteHero(e, props=this.props){
     const {id} = e.payload;
     const el = this.props.el$(`.hero-item-${id}`).el.remove();
-    console.log("EL IS ", el)
    ;
   }
 

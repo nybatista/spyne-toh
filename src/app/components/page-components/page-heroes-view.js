@@ -30,7 +30,6 @@ export class PageHeroesView extends ViewStream {
       this.tohPage$AddPageTraits();
       this.props.data.heroesArr.forEach(this.tohPage$AddHeroItem.bind(this));
 
-      console.log("HEROES PAGE ",this.props.data);
 
     }
 

@@ -19,8 +19,6 @@ export class ChannelToh extends Channel{
   onRouteChangeEvent(e){
     const {routeData} = e.payload;
     const {pageId, id} = routeData;
-
-    console.log("ROUTE DATA ",{routeData, pageId, id}, e);
     let heroesArr = this.tohData$GetPageData({pageId, id}, this.props.heroesData);
     const msg = this.tohData$GenerateMessage({eventType: 'fetch', id});
     const payload = Object.assign({}, {pageId, id, msg, heroesArr});
@@ -65,11 +63,9 @@ export class ChannelToh extends Channel{
       heroPayload['msg'] = this.tohData$GenerateMessage({eventType, id}, heroPayload);
 
       const heroAction = `CHANNEL_TOH_${eventType.toUpperCase()}_EVENT`;
-      console.log("ACTION STUFF ", {eventType, eventVal, heroAction, heroPayload});
       this.sendChannelPayload(heroAction, heroPayload);
 
 
-      console.log({eventType,eventVal,id, e});
 
 
     }
