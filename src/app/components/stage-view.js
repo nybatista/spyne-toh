@@ -1,7 +1,7 @@
 import {ViewStream} from 'spyne';
 import {TohPageTraits} from 'traits/toh-page-traits';
 
-export class AppStageView extends ViewStream {
+export class StageView extends ViewStream {
 
     constructor(props={}) {
         props.id = 'app-stage';

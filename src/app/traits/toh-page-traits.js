@@ -13,6 +13,13 @@ export class TohPageTraits extends SpyneTrait {
     super(context, traitPrefix);
   }
 
+  static tohPage$UpdateDetailsHeroLabel(e, props=this.props){
+    const inputStr = e.srcElement.el.value;
+    this.props.el$('#hero h2').el.innerText = `${String(inputStr).toUpperCase()} Details`;
+  }
+  static tohPage$UpdateSave(e, props=this.props){
+    window.history.go(-1)
+  }
 
   static tohPage$AddPageTraits(e){
     this.addChannel("CHANNEL_TOH", true);

@@ -1,6 +1,5 @@
 import {Subject} from 'rxjs';
 import {Channel, ChannelPayloadFilter} from 'spyne';
-import {TohPageTraits} from 'traits/toh-page-traits';
 import {TohDataTraits} from 'traits/toh-data-traits';
 
 export class ChannelToh extends Channel{
@@ -8,7 +7,7 @@ export class ChannelToh extends Channel{
   constructor(name, props={}) {
     name="CHANNEL_TOH";
     props.sendCachedPayload = true;
-    props.traits = [TohPageTraits, TohDataTraits];
+    props.traits = [TohDataTraits];
     props.heroesData = TohDataTraits.tohData$CreateDataObj();
 
 
@@ -22,8 +21,7 @@ export class ChannelToh extends Channel{
     const {pageId, id} = routeData;
 
     console.log("ROUTE DATA ",{routeData, pageId, id}, e);
-    let heroesArr = this.tohData$GetPageData({pageId, id},
-        this.props.heroesData);
+    let heroesArr = this.tohData$GetPageData({pageId, id}, this.props.heroesData);
     const msg = this.tohData$GenerateMessage({eventType: 'fetch', id});
     const payload = Object.assign({}, {pageId, id, msg, heroesArr});
 
@@ -62,6 +60,13 @@ export class ChannelToh extends Channel{
       }
 
       const eventVal = eventTypeHash[eventType]();
+
+      const heroPayload = this.props.heroesData[eventType](eventVal, id);
+      heroPayload['msg'] = this.tohData$GenerateMessage({eventType, id}, heroPayload);
+
+      const heroAction = `CHANNEL_TOH_${eventType.toUpperCase()}_EVENT`;
+      console.log("ACTION STUFF ", {eventType, eventVal, heroAction, heroPayload});
+      this.sendChannelPayload(heroAction, heroPayload);
 
 
       console.log({eventType,eventVal,id, e});

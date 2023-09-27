@@ -6,7 +6,7 @@ export class PageDashboardView extends ViewStream {
 
     constructor(props={}) {
         props.id = "dashboard";
-        props.traits = [TohPageTraits]
+        props.traits = [TohPageTraits];
 
         props.template = require('./templates/page-dashboard.component.html');
         super(props);
@@ -28,7 +28,7 @@ export class PageDashboardView extends ViewStream {
 
     onRendered() {
       this.tohPage$AddPageTraits();
-      this.appendView(new PageDashboardSearchComponent(), "#app-hero-search")
+      this.appendView(new PageDashboardSearchComponent(), "#hero-search");
 
     }
 

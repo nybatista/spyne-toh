@@ -1,6 +1,6 @@
 import {ViewStream, DomElement, ChannelPayloadFilter} from 'spyne';
 
-export class MessagesView extends ViewStream {
+export class StageMessagesComponent extends ViewStream {
 
     constructor(props={}) {
         props.id = "messages";

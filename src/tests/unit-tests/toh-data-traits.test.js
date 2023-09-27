@@ -55,10 +55,10 @@ describe('should create a Heroes Object with various controls ',()=>{
     console.log('ast search 3 is ',search3);
     console.log('ast search 4 is ',search4);*/
 
-    expect(search1).to.deep.eq([{id: 13, name: 'Bombasto'}]);
-    expect(search2).to.deep.eq([{id: 14, name: 'Celeritas'}]);
-    expect(search3).to.deep.eq([{id: 13, name: 'Bombasto'}]);
-    expect(search4).to.deep.eq([{id: 14, name: 'Celeritas'}, {id: 15, name: 'Magneta'}, {id: 16, name: 'RubberMan'}, {id: 17, name: 'Dynama'}, {id: 19, name: 'Magma'}, {id: 20, name: 'Tornado'}]);
+    expect(search1.foundHeroesArr).to.deep.eq([{id: 13, name: 'Bombasto'}]);
+    expect(search2.foundHeroesArr).to.deep.eq([{id: 14, name: 'Celeritas'}]);
+    expect(search3.foundHeroesArr).to.deep.eq([{id: 13, name: 'Bombasto'}]);
+    expect(search4.foundHeroesArr).to.deep.eq([{id: 14, name: 'Celeritas'}, {id: 15, name: 'Magneta'}, {id: 16, name: 'RubberMan'}, {id: 17, name: 'Dynama'}, {id: 19, name: 'Magma'}, {id: 20, name: 'Tornado'}]);
 
 
   })

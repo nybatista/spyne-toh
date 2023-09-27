@@ -1,7 +1,7 @@
 import {ViewStream} from 'spyne';
 import {TohPageTraits} from 'traits/toh-page-traits';
-import {AppStageView} from 'components/app-stage-view';
-import {MessagesView} from 'components/messages-view';
+import {StageView} from 'components/stage-view';
+import {StageMessagesComponent} from 'components/stage-messages-component';
 
 export class AppView extends ViewStream {
 
@@ -24,8 +24,8 @@ export class AppView extends ViewStream {
   }
 
   onRendered() {
-    this.appendView(new AppStageView());
-    this.appendView(new MessagesView());
+    this.appendView(new StageView());
+    this.appendView(new StageMessagesComponent());
   }
 
 }

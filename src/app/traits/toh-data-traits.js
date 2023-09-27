@@ -33,7 +33,7 @@ export class TohDataTraits extends SpyneTrait {
     const heroStr = id!==undefined ? "hero" : "heroes";
     const pastTense = s => s.replace(/^(\w+?)(e*?)$/, "$1ed")
 
-    const searchPrefix = ()=>data.heroesArr.length>=1 ? "found" : "no"
+    const searchPrefix = ()=>data.foundHeroesArr.length>=1 ? "found" : "no"
     const idStr = id===undefined ? '' : eventType === 'add' ? ` w/ id=${id}` : ` id=${id}`;
     const msgType =  eventType === 'search' ? `${searchPrefix()} heroes matching "${data.searchStr}"` : `${pastTense(eventType)} ${heroStr}${idStr}`;
 
@@ -58,23 +58,28 @@ export class TohDataTraits extends SpyneTrait {
       }
 
       getTopHeroes(){
-        return _heroesArr.slice(0, 4);
+        return clone(_heroesArr.slice(0, 4));
       }
 
       add(name){
         const id = compose(inc, last, pluck(['id']))(_heroesArr);
         const newHero = {id, name};
         _heroesArr.push(newHero);
+        return newHero;
       }
 
       update(val, id){
-        _heroesArr.filter(o => o.id === id)[0].name = val;
+        const obj = _heroesArr.filter(o => o.id === parseInt(id))[0]
+
+        //console.log('heroes arr ', {val,id,_heroesArr, obj}, Object.isExtensible(obj), Object.isFrozen(obj));
+
+         obj.name = val;
         return this.getHero(id);
       }
 
       delete(id){
          _heroesArr = reject(propEq(id, 'id'))(_heroesArr);
-         return id;
+         return {id};
       }
 
       search(searchStr){
@@ -87,10 +92,10 @@ export class TohDataTraits extends SpyneTrait {
         }
         const searchItems = _heroesArr.reduce(reducerFn, []);
 
-        const results = clone(difference(searchItems, _prevSearchedHeroes));
-        _prevSearchedHeroes = results;
+        const foundHeroesArr = clone(difference(searchItems, _prevSearchedHeroes));
+        _prevSearchedHeroes = foundHeroesArr;
 
-        return results;
+        return {foundHeroesArr, searchStr};
 
       }
 
@@ -100,7 +105,7 @@ export class TohDataTraits extends SpyneTrait {
 
 
       get heroes(){
-        return _heroesArr;
+        return clone(_heroesArr);
       }
 
 

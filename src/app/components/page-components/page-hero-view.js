@@ -21,7 +21,9 @@ export class PageHeroView extends ViewStream {
       const actionListenersArr = [];
       actionListenersArr.push(this.tohPage$AddRouteActionListener());
 
-      actionListenersArr.push(["CHANNEL_UI_CLICK_EVENT", "onGoBack", "#go-back"])
+      actionListenersArr.push(["CHANNEL_UI_CLICK_EVENT", "onGoBack"]);
+      actionListenersArr.push(["CHANNEL_UI_INPUT_EVENT", "tohPage$UpdateDetailsHeroLabel" ])
+      actionListenersArr.push(["CHANNEL_TOH_UPDATE_EVENT", "tohPage$UpdateSave" ])
       return actionListenersArr;
     }
 
@@ -33,7 +35,8 @@ export class PageHeroView extends ViewStream {
     broadcastEvents() {
       // return nexted array(s)
       return [
-          ['button', 'click']
+          ['button', 'click'],
+        ['#hero-name', 'input']
       ];
     }
 
