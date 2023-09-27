@@ -39,6 +39,7 @@ describe('should create a Heroes Object with various controls ',()=>{
   it('should remove a specific hero by id',()=>{
     const heroesData = TohDataTraits.tohData$CreateDataObj();
     heroesData.delete(12);
+    //console.log("HEROES DATA HEROES ",heroesData.heroes);
     expect(heroesData.getHero(12)).to.be.undefined;
   })
 
@@ -141,13 +142,13 @@ describe('should create a Heroes Object with various controls ',()=>{
     it('should return search found msg ',()=>{
       const searchFoundMsg = TohDataTraits.tohData$GenerateMessage(
           {eventType: 'search'},
-          {heroesArr: [{id: 13, name: 'Bombasto'}], searchStr: 'ast'});
+          {foundHeroesArr: [{id: 13, name: 'Bombasto'}], searchStr: 'ast'});
       expect(searchFoundMsg).to.eq('HeroService: found heroes matching "ast"')
     });
 
     it('should return search not found msg ',()=>{
       const searchFoundMsg = TohDataTraits.tohData$GenerateMessage(
-          {eventType: 'search'}, {heroesArr: [], searchStr: 'aste'});
+          {eventType: 'search'}, {foundHeroesArr: [], searchStr: 'aste'});
       //console.log("search not found msg ",searchFoundMsg);
       expect(searchFoundMsg).to.eq('HeroService: no heroes matching "aste"')
     });

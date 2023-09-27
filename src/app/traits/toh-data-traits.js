@@ -78,8 +78,8 @@ export class TohDataTraits extends SpyneTrait {
       }
 
       delete(id){
-         _heroesArr = reject(propEq(id, 'id'))(_heroesArr);
-         return {id};
+         _heroesArr = reject(propEq(parseInt(id), 'id'))(_heroesArr);
+        return {id};
       }
 
       search(searchStr){

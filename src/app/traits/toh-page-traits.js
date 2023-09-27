@@ -2,6 +2,7 @@ import {SpyneTrait} from 'spyne';
 import {HEROES} from '../mock-data';
 import {PageDashboardView} from 'components/page-components/page-dashboard-view';
 import {PageHeroesView} from 'components/page-components/page-heroes-view';
+import {PageHeroesItemComponent} from 'components/page-components/page-heroes-item-component';
 import {PageHeroView} from 'components/page-components/page-hero-view';
 import {Page_404View} from 'components/page-components/page-404-view';
 
@@ -20,6 +21,18 @@ export class TohPageTraits extends SpyneTrait {
   static tohPage$UpdateSave(e, props=this.props){
     window.history.go(-1)
   }
+  static tohPage$DeleteHero(e, props=this.props){
+    const {id} = e.payload;
+    const el = this.props.el$(`.hero-item-${id}`).el.remove();
+    console.log("EL IS ", el)
+   ;
+  }
+
+  static tohPage$AddHeroItem(data, props=this.props){
+    data = data.payload || data;
+    this.appendView(new PageHeroesItemComponent({data}), "ul.heroes");
+  }
+
 
   static tohPage$AddPageTraits(e){
     this.addChannel("CHANNEL_TOH", true);

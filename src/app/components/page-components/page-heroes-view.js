@@ -12,7 +12,10 @@ export class PageHeroesView extends ViewStream {
 
     addActionListeners() {
       // return nexted array(s)
-      const actionListenersArr = [];
+      const actionListenersArr = [
+        ["CHANNEL_TOH_DELETE_EVENT", "tohPage$DeleteHero" ],
+        ["CHANNEL_TOH_ADD_EVENT", "tohPage$AddHeroItem" ]
+      ];
       actionListenersArr.push(this.tohPage$AddRouteActionListener());
       return actionListenersArr;
     }
@@ -27,6 +30,9 @@ export class PageHeroesView extends ViewStream {
 
     onRendered() {
       this.tohPage$AddPageTraits();
+      this.props.data.heroesArr.forEach(this.tohPage$AddHeroItem.bind(this));
+
+      console.log("HEROES PAGE ",this.props.data);
 
     }
 
