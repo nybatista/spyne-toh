@@ -40,6 +40,16 @@ export class ChannelToh extends Channel{
 
 
     const onTOHBtn = (e)=>{
+
+      /**
+       *
+       * TODO: Move to trait
+       * match event type to method type -- update tests with new method names
+       * create method to generate correct action label
+       *
+       * */
+
+
       const {eventType, id} = e.payload;
       const getParentInputVal = ()=>e.srcElement.el.parentElement.querySelector('input').value;
 
@@ -69,7 +79,11 @@ export class ChannelToh extends Channel{
   addRegisteredActions() {
 
     return [
-        "CHANNEL_TOH_ROUTE_EVENT"
+      "CHANNEL_TOH_ROUTE_EVENT",
+      "CHANNEL_TOH_UPDATE_EVENT",
+      "CHANNEL_TOH_DELETE_EVENT",
+      "CHANNEL_TOH_ADD_EVENT",
+      "CHANNEL_TOH_SEARCH_EVENT"
     ];
   }
 
