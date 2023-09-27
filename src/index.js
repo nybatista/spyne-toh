@@ -27,7 +27,7 @@ const config = {
            "detail": {
             "routePath": {
               "routeName": "id",
-              ".12" : "12"
+              "\d+" : "\\d+"
             }
           }
         }

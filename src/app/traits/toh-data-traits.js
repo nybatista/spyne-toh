@@ -20,8 +20,6 @@ export class TohDataTraits extends SpyneTrait {
       dashboard: ()=>heroesData.getTopHeroes(),
       detail: ()=>{
         const o = heroesData.getHero(id);
-
-        console.log("ID DETAIL ",{pageId, id, heroesData,o});
         o['nameUpperCase'] = String(o.name).toUpperCase();
         return o;
       }

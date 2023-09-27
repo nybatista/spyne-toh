@@ -19,8 +19,12 @@ export class ChannelToh extends Channel{
   onRouteChangeEvent(e){
     const {routeData} = e.payload;
     const {pageId, id} = routeData;
+    console.log("PAGE DATA ",{pageId, id, routeData});
+
     let heroesArr = this.tohData$GetPageData({pageId, id}, this.props.heroesData);
+
     const msg = this.tohData$GenerateMessage({eventType: 'fetch', id});
+
     const payload = Object.assign({}, {pageId, id, msg, heroesArr});
 
     this.sendChannelPayload("CHANNEL_TOH_ROUTE_EVENT", payload);
