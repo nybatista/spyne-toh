@@ -1,4 +1,5 @@
 import {ViewStream} from 'spyne';
+import {PageDashboardSearchItem} from 'components/page-components/page-dashboard-search-item';
 
 export class PageDashboardSearchComponent extends ViewStream {
 
@@ -11,8 +12,21 @@ export class PageDashboardSearchComponent extends ViewStream {
 
     addActionListeners() {
         // return nexted array(s)
-        return [];
+        return [
+          ["CHANNEL_TOH_SEARCH_EVENT", "onSearchEvent"]
+
+        ];
     }
+
+    onSearchEvent(e){
+      const {foundHeroesArr} = e.payload;
+      console.log("found heroes arr is ",foundHeroesArr);
+
+       const addItem = (data)=>this.appendView(new PageDashboardSearchItem({data}), '.search-result');
+       foundHeroesArr.forEach(addItem);
+
+    }
+
 
     broadcastEvents() {
         // return nexted array(s)
@@ -22,6 +36,7 @@ export class PageDashboardSearchComponent extends ViewStream {
     }
 
     onRendered() {
+      this.addChannel("CHANNEL_TOH");
 
     }
 
