@@ -1,5 +1,5 @@
 import {ViewStream} from 'spyne';
-import {SpyneTohTraits} from 'traits/spyne-toh-traits';
+import {TohPageTraits} from 'traits/toh-page-traits';
 import {AppStageView} from './app-stage-view';
 import {MessagesView} from 'components/messages/messages-view';
 

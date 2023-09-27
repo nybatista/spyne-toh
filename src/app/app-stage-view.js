@@ -1,18 +1,18 @@
 import {ViewStream} from 'spyne';
-import {SpyneTohTraits} from 'traits/spyne-toh-traits';
+import {TohPageTraits} from 'traits/toh-page-traits';
 
 export class AppStageView extends ViewStream {
 
     constructor(props={}) {
         props.id = 'app-stage';
-        props.traits = [SpyneTohTraits];
+        props.traits = [TohPageTraits];
         super(props);
     }
 
     addActionListeners() {
         // return nexted array(s)
         return [
-          ['CHANNEL_TOH_ROUTE_EVENT', "toh$OnRouteChangeEvent"]
+          ['CHANNEL_TOH_ROUTE_EVENT', "toh$PageOnRouteChangeEvent"]
         ];
     }
 

@@ -1,12 +1,12 @@
 import {ViewStream} from 'spyne';
-import {SpyneTohTraits} from 'traits/spyne-toh-traits';
+import {TohPageTraits} from 'traits/toh-page-traits';
 import {DashboardHeroSearchView} from 'components/dashboard/dashboard-hero-search-view';
 
 export class DashboardView extends ViewStream {
 
     constructor(props={}) {
         props.id = "dashboard";
-        props.traits = [SpyneTohTraits]
+        props.traits = [TohPageTraits]
 
         props.template = require('./templates/dashboard.component.html');
         super(props);
@@ -15,7 +15,7 @@ export class DashboardView extends ViewStream {
     addActionListeners() {
       // return nexted array(s)
       const actionListenersArr = [];
-      actionListenersArr.push(this.toh$AddRouteActionListener());
+      actionListenersArr.push(this.toh$PageAddRouteActionListener());
       return actionListenersArr;
     }
 
@@ -27,7 +27,7 @@ export class DashboardView extends ViewStream {
     }
 
     onRendered() {
-      this.toh$AddPageTraits();
+      this.toh$PageAddPageTraits();
       this.appendView(new DashboardHeroSearchView(), "#app-hero-search")
 
     }

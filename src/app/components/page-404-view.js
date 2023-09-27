@@ -1,12 +1,12 @@
 import {ViewStream} from 'spyne';
-import {SpyneTohTraits} from 'traits/spyne-toh-traits';
+import {TohPageTraits} from 'traits/toh-page-traits';
 
 export class Page_404View extends ViewStream {
 
     constructor(props={}) {
         props.id = 'page-404';
         props.data = "404";
-        props.traits = [SpyneTohTraits]
+        props.traits = [TohPageTraits]
         props.style = "font-size: 100px;"
         super(props);
     }
@@ -14,7 +14,7 @@ export class Page_404View extends ViewStream {
     addActionListeners() {
         // return nexted array(s)
        const actionListenersArr = [];
-       actionListenersArr.push(this.toh$AddRouteActionListener());
+       actionListenersArr.push(this.toh$PageAddRouteActionListener());
         return actionListenersArr;
     }
 
@@ -24,7 +24,7 @@ export class Page_404View extends ViewStream {
     }
 
     onRendered() {
-      this.toh$AddPageTraits();
+      this.toh$PageAddPageTraits();
 
     }
 

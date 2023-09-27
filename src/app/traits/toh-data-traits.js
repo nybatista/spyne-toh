@@ -2,7 +2,7 @@ import {SpyneTrait} from 'spyne';
 import {reject, clone, propEq, difference, compose, inc, last, pluck} from 'ramda';
 import {HEROES} from '../mock-data';
 
-export class HeroesTraits extends SpyneTrait {
+export class TohDataTraits extends SpyneTrait {
 
   constructor(context){
     let traitPrefix = "heroes$";

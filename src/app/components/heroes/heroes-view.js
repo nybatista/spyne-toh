@@ -1,11 +1,11 @@
 import {ViewStream} from 'spyne';
-import {SpyneTohTraits} from 'traits/spyne-toh-traits';
+import {TohPageTraits} from 'traits/toh-page-traits';
 
 export class HeroesView extends ViewStream {
 
     constructor(props={}) {
         props.id = "heroes";
-        props.traits = [SpyneTohTraits];
+        props.traits = [TohPageTraits];
         props.template = require('./templates/heroes.component.html');
         super(props);
     }
@@ -13,7 +13,7 @@ export class HeroesView extends ViewStream {
     addActionListeners() {
       // return nexted array(s)
       const actionListenersArr = [];
-      actionListenersArr.push(this.toh$AddRouteActionListener());
+      actionListenersArr.push(this.toh$PageAddRouteActionListener());
       return actionListenersArr;
     }
 
@@ -26,7 +26,7 @@ export class HeroesView extends ViewStream {
     }
 
     onRendered() {
-      this.toh$AddPageTraits();
+      this.toh$PageAddPageTraits();
 
     }
 

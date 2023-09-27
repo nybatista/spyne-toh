@@ -1,10 +1,10 @@
 const {expect, assert} = require('chai');
-import {HeroesTraits} from 'traits/heroes-traits';
+import {TohDataTraits} from 'traits/toh-data-traits';
 
 describe('should test Hero Traits', () => {
 
   it('should return function from HeroTraits module', () => {
-    expect(HeroesTraits).to.be.a('function');
+    expect(TohDataTraits).to.be.a('function');
 
   });
 
@@ -12,38 +12,38 @@ describe('should test Hero Traits', () => {
 describe('should create a Heroes Object with various controls ',()=>{
 
   it('should return a Heroes Data object',()=>{
-    const heroesData = HeroesTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.heroes$CreateDataObj();
     expect(heroesData).to.be.a('object');
 
   })
 
   it('should add a new Hero',()=>{
-    const heroesData = HeroesTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.heroes$CreateDataObj();
     heroesData.addHero('ButterMan');
     expect(heroesData.getHero(21)).to.deep.eq({id: 21, name: 'ButterMan'});
 
   })
 
   it('should return a specific hero by id ',()=>{
-    const heroesData = HeroesTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.heroes$CreateDataObj();
     expect(heroesData.getHero(12)).to.deep.eq({id: 12, name: 'Dr. Nice'});
   })
 
   it('should rename a specific hero by id',()=>{
-    const heroesData = HeroesTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.heroes$CreateDataObj();
     heroesData.renameHero(12, 'New Name');
     expect(heroesData.getHero(12)).to.deep.eq({id: 12, name: 'New Name'});
   })
 
   it('should remove a specific hero by id',()=>{
-    const heroesData = HeroesTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.heroes$CreateDataObj();
     heroesData.removeHero(12);
     expect(heroesData.getHero(12)).to.be.undefined;
   })
 
 
   it('should search heroes by string',()=>{
-    const heroesData = HeroesTraits.heroes$CreateDataObj();
+    const heroesData = TohDataTraits.heroes$CreateDataObj();
     const search1 = heroesData.searchHero('ast');
     const search2 = heroesData.searchHero('as');
     const search3 = heroesData.searchHero('ast');

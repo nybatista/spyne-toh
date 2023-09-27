@@ -1,11 +1,11 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
-import {SpyneTohTraits} from 'traits/spyne-toh-traits';
+import {TohPageTraits} from 'traits/toh-page-traits';
 
 export class HeroDetailView extends ViewStream {
 
     constructor(props={}) {
       props.id = "hero-detail";
-      props.traits = [SpyneTohTraits];
+      props.traits = [TohPageTraits];
 
       console.log("PROPS DATA IS ",props.data,' -- ',props.data.name);
 
@@ -19,7 +19,7 @@ export class HeroDetailView extends ViewStream {
 
 
       const actionListenersArr = [];
-      actionListenersArr.push(this.toh$AddRouteActionListener());
+      actionListenersArr.push(this.toh$PageAddRouteActionListener());
 
       actionListenersArr.push(["CHANNEL_UI_CLICK_EVENT", "onGoBack", "#go-back"])
       return actionListenersArr;
@@ -38,7 +38,7 @@ export class HeroDetailView extends ViewStream {
     }
 
     onRendered() {
-      this.toh$AddPageTraits();
+      this.toh$PageAddPageTraits();
 
       this.addChannel("CHANNEL_UI");
 

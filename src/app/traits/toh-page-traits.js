@@ -5,16 +5,16 @@ import {HeroesView} from 'components/heroes/heroes-view';
 import {HeroDetailView} from 'components/heroes/hero-detail-view';
 import {Page_404View} from 'components/page-404-view';
 
-export class SpyneTohTraits extends SpyneTrait {
+export class TohPageTraits extends SpyneTrait {
 
   constructor(context){
-    let traitPrefix = "toh$";
+    let traitPrefix = "toh$Page";
 
     super(context, traitPrefix);
   }
 
 
-  static toh$GetPageData(pageInfo={pageId:"heroes"}, heroesData=this.props.heroesData){
+  static toh$PageGetPageData(pageInfo={pageId:"heroes"}, heroesData=this.props.heroesData){
     const {pageId, id} = pageInfo;
     //console.log("get page data ",{pageId, id, heroesData}, typeof heroesData.getTopHeroes)
     const _dataHashObj = {
@@ -30,7 +30,7 @@ export class SpyneTohTraits extends SpyneTrait {
     return _dataHashObj[pageId]();
   }
 
-  static toh$GenerateMessage(msgVals={eventType:'fetch'}, data){
+  static toh$PageGenerateMessage(msgVals = {eventType: 'fetch'}, data){
     const {eventType, id} = msgVals;
     const heroStr = id!==undefined ? "hero" : "heroes";
     const pastTense = s => s.replace(/^(\w+?)(e*?)$/, "$1ed")
@@ -46,17 +46,17 @@ export class SpyneTohTraits extends SpyneTrait {
 
 
 
-  static toh$AddPageTraits(e){
+  static toh$PageAddPageTraits(e){
     this.addChannel("CHANNEL_TOH", true);
 
   }
 
-  static toh$AddRouteActionListener(){
+  static toh$PageAddRouteActionListener(){
     return ["CHANNEL_TOH_ROUTE_EVENT", "disposeViewStream"]
 
   }
 
-  static toh$OnRouteChangeEvent(e){
+  static toh$PageOnRouteChangeEvent(e){
     const {payload} = e;
     const {pageId, id, heroesArr} = e.payload;
 
@@ -76,7 +76,7 @@ export class SpyneTohTraits extends SpyneTrait {
   }
 
 
-  static toh$GetHeroesData(){
+  static toh$PageGetHeroesData(){
    return HEROES;
   }
 
