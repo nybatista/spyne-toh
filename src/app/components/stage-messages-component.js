@@ -21,7 +21,6 @@ export class StageMessagesComponent extends ViewStream {
 
     onChannelRoute(e){
       const {msg} = e.payload;
-      console.log("MSG IS ",{msg})
       this.props.msgHolder$.el.appendChild(new DomElement({data: msg}).render());
     }
 

@@ -1,5 +1,4 @@
 import {ViewStream} from 'spyne';
-import {TohPageTraits} from 'traits/toh-page-traits';
 import {StageView} from 'components/stage-view';
 import {StageMessagesComponent} from 'components/stage-messages-component';
 

@@ -1,5 +1,4 @@
 import {SpyneTrait} from 'spyne';
-import {HEROES} from '../mock-data';
 import {PageDashboardView} from 'components/page-components/page-dashboard-view';
 import {PageHeroesView} from 'components/page-components/page-heroes-view';
 import {PageHeroesItemComponent} from 'components/page-components/page-heroes-item-component';
@@ -31,15 +30,12 @@ export class TohPageTraits extends SpyneTrait {
     this.appendView(new PageHeroesItemComponent({data}), "ul.heroes");
   }
 
-
   static tohPage$AddPageTraits(e){
     this.addChannel("CHANNEL_TOH", true);
-
   }
 
   static tohPage$AddRouteActionListener(){
     return ["CHANNEL_TOH_ROUTE_EVENT", "disposeViewStream"]
-
   }
 
   static tohPage$OnRouteChangeEvent(e){

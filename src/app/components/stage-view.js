@@ -10,7 +10,6 @@ export class StageView extends ViewStream {
     }
 
     addActionListeners() {
-        // return nexted array(s)
         return [
           ['CHANNEL_TOH_ROUTE_EVENT', "tohPage$OnRouteChangeEvent"]
         ];

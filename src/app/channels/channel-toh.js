@@ -1,4 +1,3 @@
-import {Subject} from 'rxjs';
 import {Channel, ChannelPayloadFilter} from 'spyne';
 import {TohChannelTraits} from 'traits/toh-channel-traits';
 
@@ -12,16 +11,14 @@ export class ChannelToh extends Channel{
     super(name, props);
   }
 
-
   onRegistered(){
     const btnsFilter = new ChannelPayloadFilter({selector: [".btn-toh", ".input-toh"]})
 
     this.getChannel("CHANNEL_UI", btnsFilter)
-        .subscribe(this.tohChannel$SendBtnClickedEvent.bind(this));
+      .subscribe(this.tohChannel$SendBtnClickEvent.bind(this));
 
     this.getChannel("CHANNEL_ROUTE")
-    .subscribe(this.tohChannel$SendRouteChangeEvent.bind(this));
-
+      .subscribe(this.tohChannel$SendRouteChangeEvent.bind(this));
   }
 
   addRegisteredActions() {

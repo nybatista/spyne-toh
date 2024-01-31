@@ -9,8 +9,7 @@ export class TohChannelTraits extends SpyneTrait {
     super(context, traitPrefix);
   }
 
-
-  static tohChannel$SendBtnClickedEvent(e){
+  static tohChannel$SendBtnClickEvent(e){
     const {eventType, id} = e.payload;
     const getParentInputVal = ()=>e.srcElement.el.parentElement.querySelector('input').value;
 
@@ -41,6 +40,37 @@ export class TohChannelTraits extends SpyneTrait {
     const payload = Object.assign({}, {pageId, id, msg, heroesArr});
     this.sendChannelPayload("CHANNEL_TOH_ROUTE_EVENT", payload);
   }
+
+
+  static tohChannel$GetPageData(pageInfo = {pageId: 'heroes'}, heroesData = this.props.heroesData){
+    const {pageId, id} = pageInfo;
+    const _dataHashObj = {
+      heroes: ()=>heroesData.heroes,
+      dashboard: ()=>heroesData.getTopHeroes(),
+      detail: ()=>{
+        const o = heroesData.getHero(id);
+        o['nameUpperCase'] = String(o.name).toUpperCase();
+        return o;
+      },
+      404: ()=>({})
+    }
+    return _dataHashObj[pageId]();
+  }
+
+  static tohChannel$GenerateMessage(msgVals = {eventType: 'fetch'}, data){
+    const {eventType, id} = msgVals;
+    const heroStr = id!==undefined ? "hero" : "heroes";
+    const pastTense = s => s.replace(/^(\w+?)(e*?)$/, "$1ed")
+
+    const searchPrefix = ()=>data.foundHeroesArr.length>=1 ? "found" : "no"
+    const idStr = id===undefined ? '' : eventType === 'add' ? ` w/ id=${id}` : ` id=${id}`;
+    const msgType =  eventType === 'search' ? `${searchPrefix()} heroes matching "${data.searchStr}"` : `${pastTense(eventType)} ${heroStr}${idStr}`;
+
+    return `HeroService: ${msgType}`;
+
+  }
+
+
 
   static tohChannel$CreateHeroDataObj(){
     let _heroesArr = clone(HEROES);
@@ -98,37 +128,6 @@ export class TohChannelTraits extends SpyneTrait {
     return new HeroesData();
   }
 
-
-
-  static tohChannel$GetPageData(pageInfo = {pageId: 'heroes'}, heroesData = this.props.heroesData){
-    const {pageId, id} = pageInfo;
-    //console.log("get page data ",{pageId, id, heroesData}, typeof heroesData.getTopHeroes)
-    const _dataHashObj = {
-      heroes: ()=>heroesData.heroes,
-      dashboard: ()=>heroesData.getTopHeroes(),
-      detail: ()=>{
-        const o = heroesData.getHero(id);
-        o['nameUpperCase'] = String(o.name).toUpperCase();
-        return o;
-      },
-      404: ()=>({})
-    }
-
-    return _dataHashObj[pageId]();
-  }
-
-  static tohChannel$GenerateMessage(msgVals = {eventType: 'fetch'}, data){
-    const {eventType, id} = msgVals;
-    const heroStr = id!==undefined ? "hero" : "heroes";
-    const pastTense = s => s.replace(/^(\w+?)(e*?)$/, "$1ed")
-
-    const searchPrefix = ()=>data.foundHeroesArr.length>=1 ? "found" : "no"
-    const idStr = id===undefined ? '' : eventType === 'add' ? ` w/ id=${id}` : ` id=${id}`;
-    const msgType =  eventType === 'search' ? `${searchPrefix()} heroes matching "${data.searchStr}"` : `${pastTense(eventType)} ${heroStr}${idStr}`;
-
-    return `HeroService: ${msgType}`;
-
-  }
 
 
 

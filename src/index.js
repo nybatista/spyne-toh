@@ -1,9 +1,7 @@
 import'./scss/main.scss';
-import {SpyneApp, Channel} from 'spyne';
+import {SpyneApp} from 'spyne';
 import {AppView} from './app/app-view';
 import {ChannelToh} from 'channels/channel-toh.js';
-const R = require('ramda');
-window.R = R;
 
 const config = {
   'debug': true,
@@ -37,19 +35,12 @@ const config = {
 };
 
 
-
-
-
-
 SpyneApp.init(config);
 SpyneApp.registerChannel(new ChannelToh());
 
 if (process.env.NODE_ENV === 'development') {
   const {SpynePluginConsole} = require('spyne-plugin-console');
   const addConsole = ()=>new SpynePluginConsole({position: ['bottom', 'right'], minimize: true});
-
-  //addConsole();
-
   window.setTimeout(addConsole, 1000);
 }
 
