@@ -1,4 +1,8 @@
-##  Spynejs Hello World Application
+##  Spyne Comparison: Tour of Heroes
+
+compare with
+https://angular.io/generated/live-examples/toh-pt6/stackblitz.html
+
  barebones app preconfigured for building, testing and adding content using the spyne-cli tool
 
 App includes
