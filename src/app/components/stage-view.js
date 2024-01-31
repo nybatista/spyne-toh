@@ -17,11 +17,7 @@ export class StageView extends ViewStream {
     }
 
     broadcastEvents() {
-        // return nexted array(s)
-        return [
-
-        ];
-
+        return [];
     }
 
     onRendered() {

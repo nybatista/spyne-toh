@@ -9,19 +9,8 @@ export class PageDashboardSearchItem extends ViewStream {
     }
 
     addActionListeners() {
-        // return nexted array(s)
-        const checkForMatch = (pl)=>{
-          const {searchStr} = pl;
-          const re = new RegExp(searchStr, "g");
-          const match = re.test(this.props.data.name);
-
-          return match === false || searchStr === "";
-        }
-
         const reFalseMatchPayloadFilter = new ChannelPayloadFilter({
-
-          payload: checkForMatch
-
+          payload: (p)=>this.props.data.name.includes(p.searchStr) === false || p.searchStr === ""
         });
 
         return [
@@ -30,7 +19,6 @@ export class PageDashboardSearchItem extends ViewStream {
     }
 
     broadcastEvents() {
-        // return nexted array(s)
         return [
             ['a', 'click']
         ];

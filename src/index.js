@@ -46,7 +46,11 @@ SpyneApp.registerChannel(new ChannelToh());
 
 if (process.env.NODE_ENV === 'development') {
   const {SpynePluginConsole} = require('spyne-plugin-console');
-  new SpynePluginConsole({position: ['bottom', 'right'], minimize: true});
+  const addConsole = ()=>new SpynePluginConsole({position: ['bottom', 'right'], minimize: true});
+
+  //addConsole();
+
+  window.setTimeout(addConsole, 1000);
 }
 
 new AppView().prependToDom(document.body);

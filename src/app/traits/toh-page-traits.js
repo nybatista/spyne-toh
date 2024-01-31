@@ -54,7 +54,6 @@ export class TohPageTraits extends SpyneTrait {
 
     const PageClass = pageIdHash[pageId] || Page_404View;
 
-    //console.log("page id ",{PageClass,pageId, id},e);
     this.appendView(new PageClass({
       data: payload
     }));

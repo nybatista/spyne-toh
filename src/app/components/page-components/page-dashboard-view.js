@@ -7,20 +7,17 @@ export class PageDashboardView extends ViewStream {
     constructor(props={}) {
         props.id = "dashboard";
         props.traits = [TohPageTraits];
-
         props.template = require('./templates/page-dashboard.component.html');
         super(props);
     }
 
     addActionListeners() {
-      // return nexted array(s)
-      const actionListenersArr = [];
-      actionListenersArr.push(this.tohPage$AddRouteActionListener());
-      return actionListenersArr;
+        return [
+          this.tohPage$AddRouteActionListener()
+        ]
     }
 
     broadcastEvents() {
-      // return nexted array(s)
       return [
           ['a', 'click']
       ];

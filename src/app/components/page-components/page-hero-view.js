@@ -14,16 +14,12 @@ export class PageHeroView extends ViewStream {
     }
 
     addActionListeners() {
-      // return nexted array(s)
-
-
-      const actionListenersArr = [
+      return [
         ["CHANNEL_UI_CLICK_EVENT", "tohPage$UpdateSave", "#go-back"],
         ["CHANNEL_UI_INPUT_EVENT", "tohPage$UpdateDetailsHeroLabel"],
-        ["CHANNEL_TOH_UPDATE_EVENT", "tohPage$UpdateSave" ]
+        ["CHANNEL_TOH_UPDATE_EVENT", "tohPage$UpdateSave" ],
+        this.tohPage$AddRouteActionListener()
       ];
-      actionListenersArr.push(this.tohPage$AddRouteActionListener());
-      return actionListenersArr;
     }
 
     onGoBack(e){
@@ -31,18 +27,15 @@ export class PageHeroView extends ViewStream {
     }
 
     broadcastEvents() {
-      // return nexted array(s)
       return [
-          ['button', 'click'],
+        ['button', 'click'],
         ['#hero-name', 'input']
       ];
     }
 
     onRendered() {
       this.tohPage$AddPageTraits();
-
       this.addChannel("CHANNEL_UI");
-
     }
 
 }

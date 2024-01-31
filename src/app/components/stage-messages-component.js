@@ -5,33 +5,27 @@ export class StageMessagesComponent extends ViewStream {
     constructor(props={}) {
         props.id = "messages";
         props.template = require('./templates/messages.component.html');
-
         super(props);
     }
 
     addActionListeners() {
-        // return nexted array(s)
         return [
-            ["CHANNEL_TOH_ROUTE_EVENT", "onChannelRoute"],
+            ["CHANNEL_TOH_.*_EVENT", "onChannelRoute"],
             ["CHANNEL_UI_CLICK_EVENT", "onClearMsgs", ".clear"]
         ];
     }
 
     onClearMsgs(e){
-
       this.props.msgHolder$.el.innerHTML = "";
-
     }
 
     onChannelRoute(e){
       const {msg} = e.payload;
-
+      console.log("MSG IS ",{msg})
       this.props.msgHolder$.el.appendChild(new DomElement({data: msg}).render());
-
     }
 
     broadcastEvents() {
-        // return nexted array(s)
         return [
             ['.clear', 'click']
         ];

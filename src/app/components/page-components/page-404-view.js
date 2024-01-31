@@ -12,14 +12,12 @@ export class Page_404View extends ViewStream {
     }
 
     addActionListeners() {
-        // return nexted array(s)
        const actionListenersArr = [];
        actionListenersArr.push(this.tohPage$AddRouteActionListener());
         return actionListenersArr;
     }
 
     broadcastEvents() {
-        // return nexted array(s)
         return [];
     }
 

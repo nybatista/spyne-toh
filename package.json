@@ -8,12 +8,14 @@
     "start": "webpack serve --open",
     "build": "webpack --mode production --env build",
     "build:apache": "buildType=apache webpack --mode production --env build",
+    "installLinks": "npm link spyne spyne-plugin-console",
     "test": "karma start"
   },
   "dependencies": {
     "ramda": "^0.29.0",
+    "rxjs": "^7.8.1",
     "spyne": "^0.18.3",
-    "spyne-plugin-console": "^0.3.3"
+    "spyne-plugin-console": "^0.4.0"
   },
   "devDependencies": {
     "chai": "^4.3.4",

@@ -11,20 +11,16 @@ export class PageHeroesItemComponent extends ViewStream {
 
     addActionListeners() {
       const idPayloadFilter = new ChannelPayloadFilter({
-
         payload: v=>parseInt(v.id) === parseInt(this.props.data.id)
       })
-        // return nexted array(s)
         return [
           ["CHANNEL_TOH_DELETE_EVENT", "disposeViewStream", idPayloadFilter]
         ];
     }
 
     broadcastEvents() {
-        // return nexted array(s)
         return [
           ['a', 'click']
-
         ];
     }
 

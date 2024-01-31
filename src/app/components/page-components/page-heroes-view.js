@@ -11,16 +11,13 @@ export class PageHeroesView extends ViewStream {
     }
 
     addActionListeners() {
-      // return nexted array(s)
-      const actionListenersArr = [
-        ["CHANNEL_TOH_ADD_EVENT", "tohPage$AddHeroItem" ]
+      return [
+        ["CHANNEL_TOH_ADD_EVENT", "tohPage$AddHeroItem" ],
+        this.tohPage$AddRouteActionListener()
       ];
-      actionListenersArr.push(this.tohPage$AddRouteActionListener());
-      return actionListenersArr;
     }
 
     broadcastEvents() {
-      // return nexted array(s)
       return [
           ['button', 'click']
       ];
