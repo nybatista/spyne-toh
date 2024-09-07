@@ -13,14 +13,14 @@ const config = {
     },
 
     'ROUTE': {
-      "type": "slash",
+      "type": "query",
       "isHash": false,
       "isHidden": false,
       "add404s": true,
       "routes": {
         "routePath": {
           "routeName": "pageId",
-          "dashboard" : "^$",
+          "dashboard" : "dashboard|^$|index.html",
           "heroes" : "heroes",
            "detail": {
             "routePath": {
