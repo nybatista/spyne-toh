@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {reject, clone, propEq, difference, compose, isEmpty, inc, last, pluck} from 'ramda';
+import {reject, clone, propEq, difference, compose, defaultTo, isEmpty, inc, last, pluck} from 'ramda';
 import {HEROES} from '../mock-data';
 
 export class TohChannelTraits extends SpyneTrait {
@@ -77,6 +77,8 @@ export class TohChannelTraits extends SpyneTrait {
 
   static tohChannel$CreateHeroDataObj(){
     let _heroesArr = clone(HEROES);
+    let _heroesId = compose(defaultTo(1), inc, last, pluck(['id']))(_heroesArr);
+
     let _prevSearchedHeroes = [];
 
     class HeroesData {
@@ -104,7 +106,7 @@ export class TohChannelTraits extends SpyneTrait {
           nextNum++;
         }
 
-        const id = compose(inc, last, pluck(['id']))(_heroesArr);
+        const id = _heroesId++;
         const newHero = { id, name: newName };
         _heroesArr.push(newHero);
         return clone(newHero);
