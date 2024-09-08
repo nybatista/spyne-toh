@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {reject, clone, propEq, difference, compose, inc, last, pluck} from 'ramda';
+import {reject, clone, propEq, difference, compose, isEmpty, inc, last, pluck} from 'ramda';
 import {HEROES} from '../mock-data';
 
 export class TohChannelTraits extends SpyneTrait {
@@ -21,6 +21,9 @@ export class TohChannelTraits extends SpyneTrait {
     }
 
     const eventVal = eventTypeHash[eventType]();
+
+    // Do nothing if eventVal is empty
+    if(isEmpty(eventVal)) return;
 
     const heroPayload = this.props.heroesData[eventType](eventVal, id);
     heroPayload['msg'] = this.tohChannel$GenerateMessage({eventType, id}, heroPayload);
@@ -89,9 +92,20 @@ export class TohChannelTraits extends SpyneTrait {
         return clone(_heroesArr.slice(0, 4));
       }
 
-      add(name){
+      add(name) {
+        // Check if the new hero name already exists in the _heroesArr
+        let existingHeroNames = _heroesArr.map(hero => hero.name);
+        let nextNum = 1;
+        let newName = name;
+
+        // If name exists, append -nextNum until a unique name is found
+        while (existingHeroNames.includes(newName)) {
+          newName = `${name}-${nextNum}`;
+          nextNum++;
+        }
+
         const id = compose(inc, last, pluck(['id']))(_heroesArr);
-        const newHero = {id, name};
+        const newHero = { id, name: newName };
         _heroesArr.push(newHero);
         return clone(newHero);
       }

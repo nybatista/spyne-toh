@@ -19,7 +19,7 @@ export class PageHeroesView extends ViewStream {
 
     broadcastEvents() {
       return [
-          ['button', 'click']
+          ['button.add-button', 'click']
       ];
     }
 

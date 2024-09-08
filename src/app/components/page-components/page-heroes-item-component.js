@@ -20,7 +20,8 @@ export class PageHeroesItemComponent extends ViewStream {
 
     broadcastEvents() {
         return [
-          ['a', 'click']
+          ['a', 'click'],
+          ['button', 'click']
         ];
     }
 
