@@ -1,27 +1,20 @@
-import {ViewStream, DomElement, ChannelPayloadFilter} from 'spyne';
+import {ViewStream, ChannelPayloadFilter} from 'spyne';
+import { TohMessagesTraits} from '../traits/toh-messages-traits';
 
 export class StageMessagesComponent extends ViewStream {
 
     constructor(props={}) {
         props.id = "messages";
+        props.traits = [TohMessagesTraits];
         props.template = require('./templates/messages.component.html');
         super(props);
     }
 
     addActionListeners() {
         return [
-            ["CHANNEL_TOH_.*_EVENT", "onChannelRoute"],
-            ["CHANNEL_UI_CLICK_EVENT", "onClearMsgs", ".clear"]
+            ["CHANNEL_TOH_.*_EVENT", "tohMessages$OnChannelRoute"],
+            ["CHANNEL_UI_CLICK_EVENT", "tohMessages$OnClearMsgs", ".clear"]
         ];
-    }
-
-    onClearMsgs(e){
-      this.props.msgHolder$.el.innerHTML = "";
-    }
-
-    onChannelRoute(e){
-      const {msg} = e.payload;
-      this.props.msgHolder$.el.appendChild(new DomElement({data: msg}).render());
     }
 
     broadcastEvents() {

@@ -6,8 +6,6 @@ export class PageHeroView extends ViewStream {
     constructor(props={}) {
       props.id = "hero-detail";
       props.traits = [TohPageTraits];
-
-
       props.template = require('./templates/page-hero-detail.component.html')
 
         super(props);
@@ -22,9 +20,6 @@ export class PageHeroView extends ViewStream {
       ];
     }
 
-    onGoBack(e){
-      window.history.go(-1);
-    }
 
     broadcastEvents() {
       return [

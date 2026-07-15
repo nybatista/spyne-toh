@@ -1,9 +1,12 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
+import { TohMessagesTraits } from '../../traits/toh-messages-traits';
 
 export class PageDashboardSearchItem extends ViewStream {
 
     constructor(props={}) {
         props.tagName = "li";
+        props.traits = [TohMessagesTraits];
+        props.channels = ["CHANNEL_TOH"]
         props.template = require('./templates/page-dashboard-search-item.tmpl.html');
         super(props);
     }
@@ -25,7 +28,7 @@ export class PageDashboardSearchItem extends ViewStream {
     }
 
     onRendered() {
-      this.addChannel("CHANNEL_TOH");
+
     }
 
 }

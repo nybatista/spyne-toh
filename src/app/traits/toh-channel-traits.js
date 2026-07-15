@@ -10,6 +10,7 @@ export class TohChannelTraits extends SpyneTrait {
   }
 
   static tohChannel$SendBtnClickEvent(e){
+    const { action } =e;
     const {eventType, id} = e.payload;
     const getParentInputVal = ()=>e.srcElement.el.parentElement.querySelector('input').value;
 
@@ -29,11 +30,14 @@ export class TohChannelTraits extends SpyneTrait {
     heroPayload['msg'] = this.tohChannel$GenerateMessage({eventType, id}, heroPayload);
 
     const heroAction = `CHANNEL_TOH_${eventType.toUpperCase()}_EVENT`;
+
+    console.log("tohChannel$SendBtnClickEvent1", {action, eventType, heroAction, heroPayload})
     this.sendChannelPayload(heroAction, heroPayload);
 
   }
 
   static tohChannel$SendRouteChangeEvent(e){
+    const {action} = e;
     const {routeData} = e.payload;
     const {pageId, id} = routeData;
 
@@ -41,6 +45,9 @@ export class TohChannelTraits extends SpyneTrait {
     const msg = this.tohChannel$GenerateMessage({eventType: 'fetch', id});
 
     const payload = Object.assign({}, {pageId, id, msg, heroesArr});
+
+    console.log("tohChannel$SendRouteChangeEvent", {action, routeData, msg, payload})
+
     this.sendChannelPayload("CHANNEL_TOH_ROUTE_EVENT", payload);
   }
 
@@ -68,7 +75,7 @@ export class TohChannelTraits extends SpyneTrait {
     const searchPrefix = ()=>data.foundHeroesArr.length>=1 ? "found" : "no"
     const idStr = id===undefined ? '' : eventType === 'add' ? ` w/ id=${id}` : ` id=${id}`;
     const msgType =  eventType === 'search' ? `${searchPrefix()} heroes matching "${data.searchStr}"` : `${pastTense(eventType)} ${heroStr}${idStr}`;
-
+    //console.log("GEN MSG ",{data, msgVals})
     return `HeroService: ${msgType}`;
 
   }

@@ -1,24 +1,20 @@
 import {ViewStream} from 'spyne';
-import {PageDashboardSearchItem} from 'components/page-components/page-dashboard-search-item';
+import { TohDashboardTraits } from '../../traits/toh-dashboard-traits';
 
 export class PageDashboardSearchComponent extends ViewStream {
 
     constructor(props={}) {
         props.id = "search-component";
+        props.traits = [TohDashboardTraits];
+        props.channels = ["CHANNEL_TOH"]
         props.template = require('./templates/page-dashboard-search.component.html');
         super(props);
     }
 
     addActionListeners() {
         return [
-          ["CHANNEL_TOH_SEARCH_EVENT", "onSearchEvent"]
+          ["CHANNEL_TOH_SEARCH_EVENT", "tohDashboard$OnSearchEvent"]
         ];
-    }
-
-    onSearchEvent(e){
-      const {foundHeroesArr} = e.payload;
-       const addItem = (data)=>this.appendView(new PageDashboardSearchItem({data}), '.search-result');
-       foundHeroesArr.forEach(addItem);
     }
 
 
@@ -29,7 +25,6 @@ export class PageDashboardSearchComponent extends ViewStream {
     }
 
     onRendered() {
-      this.addChannel("CHANNEL_TOH");
 
     }
 

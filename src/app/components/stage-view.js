@@ -6,6 +6,7 @@ export class StageView extends ViewStream {
     constructor(props={}) {
         props.id = 'app-stage';
         props.traits = [TohPageTraits];
+        props.channels = ["CHANNEL_TOH"]
         super(props);
     }
 
@@ -20,7 +21,7 @@ export class StageView extends ViewStream {
     }
 
     onRendered() {
-        this.addChannel("CHANNEL_TOH");
+
 
     }
 
