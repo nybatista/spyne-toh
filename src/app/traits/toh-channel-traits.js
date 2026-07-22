@@ -1,5 +1,4 @@
 import {SpyneTrait} from 'spyne';
-import {reject, clone, propEq, difference, compose, defaultTo, isEmpty, inc, last, pluck} from 'ramda';
 import {HEROES} from '../mock-data';
 
 export class TohChannelTraits extends SpyneTrait {
@@ -24,7 +23,7 @@ export class TohChannelTraits extends SpyneTrait {
     const eventVal = eventTypeHash[eventType]();
 
     // Do nothing if eventVal is empty
-    if(isEmpty(eventVal)) return;
+    if(String(eventVal) === "") return;
 
     const heroPayload = this.props.heroesData[eventType](eventVal, id);
     heroPayload['msg'] = this.tohChannel$GenerateMessage({eventType, id}, heroPayload);
@@ -72,7 +71,10 @@ export class TohChannelTraits extends SpyneTrait {
     const heroStr = id!==undefined ? "hero" : "heroes";
     const pastTense = s => s.replace(/^(\w+?)(e*?)$/, "$1ed")
 
-    const searchPrefix = ()=>data.foundHeroesArr.length>=1 ? "found" : "no"
+    // message reflects TOTAL matches, not the appended delta — a narrowed
+    // term ("B" -> "Bo") can match only already-displayed heroes, leaving
+    // the delta empty while the search itself still has matches
+    const searchPrefix = ()=>data.matchCount>=1 ? "found" : "no"
     const idStr = id===undefined ? '' : eventType === 'add' ? ` w/ id=${id}` : ` id=${id}`;
     const msgType =  eventType === 'search' ? `${searchPrefix()} heroes matching "${data.searchStr}"` : `${pastTense(eventType)} ${heroStr}${idStr}`;
     //console.log("GEN MSG ",{data, msgVals})
@@ -83,8 +85,9 @@ export class TohChannelTraits extends SpyneTrait {
 
 
   static tohChannel$CreateHeroDataObj(){
-    let _heroesArr = clone(HEROES);
-    let _heroesId = compose(defaultTo(1), inc, last, pluck(['id']))(_heroesArr);
+    let _heroesArr = structuredClone(HEROES);
+    const _lastHero = _heroesArr[_heroesArr.length - 1];
+    let _heroesId = _lastHero !== undefined ? _lastHero.id + 1 : 1;
 
     let _prevSearchedHeroes = [];
 
@@ -94,11 +97,11 @@ export class TohChannelTraits extends SpyneTrait {
 
       getHero(id) {
         id = parseInt(id);
-        return clone(_heroesArr.filter(o => o.id === id)[0]);
+        return structuredClone(_heroesArr.filter(o => o.id === id)[0]);
       }
 
       getTopHeroes(){
-        return clone(_heroesArr.slice(0, 4));
+        return structuredClone(_heroesArr.slice(0, 4));
       }
 
       add(name) {
@@ -116,7 +119,7 @@ export class TohChannelTraits extends SpyneTrait {
         const id = _heroesId++;
         const newHero = { id, name: newName };
         _heroesArr.push(newHero);
-        return clone(newHero);
+        return structuredClone(newHero);
       }
 
       update(val, id){
@@ -126,7 +129,7 @@ export class TohChannelTraits extends SpyneTrait {
       }
 
       delete(id){
-        _heroesArr = reject(propEq(parseInt(id), 'id'))(_heroesArr);
+        _heroesArr = _heroesArr.filter(o => o.id !== parseInt(id));
         return {id};
       }
 
@@ -138,14 +141,18 @@ export class TohChannelTraits extends SpyneTrait {
           return acc;
         }
         const searchItems = searchStr === "" ? [] : _heroesArr.reduce(reducerFn, []);
-        const foundHeroesArr = clone(difference(searchItems, _prevSearchedHeroes));
+        const isNewMatch = o => _prevSearchedHeroes.find(p => p.id === o.id) === undefined;
+        // foundHeroesArr is the DELTA vs the previous search — only heroes not
+        // already in the results list, so the view appends instead of
+        // re-rendering; matchCount reports the TOTAL matches for messaging
+        const foundHeroesArr = structuredClone(searchItems.filter(isNewMatch));
         _prevSearchedHeroes = searchItems;
-        return {foundHeroesArr, searchStr};
+        return {foundHeroesArr, searchStr, matchCount: searchItems.length};
 
       }
 
       get heroes(){
-        return clone(_heroesArr);
+        return structuredClone(_heroesArr);
       }
     }
     return new HeroesData();

@@ -12,9 +12,24 @@ export class ChannelToh extends Channel{
   }
 
   onRegistered(){
-    const btnsFilter = new ChannelPayloadFilter({selector: [".btn-toh", ".input-toh"]})
+    const btnsFilter = new ChannelPayloadFilter({selector: ".btn-toh"})
+
+    // Every keyup dispatched a search — including keys that cannot change
+    // the term: Shift (fired on the capital letter that starts most
+    // searches), arrows, Tab. Each re-search of the same term had an empty
+    // delta, logging a spurious 'no heroes matching' message. Accept only
+    // keyups that alter the term: printable characters (key.length === 1)
+    // plus Backspace and Delete, so corrections still re-search.
+    const searchKeyFilter = new ChannelPayloadFilter({
+      selector: ".input-toh",
+      event: (ev) => ev !== undefined &&
+        (String(ev.key).length === 1 || ["Backspace", "Delete"].includes(ev.key))
+    });
 
     this.getChannel("CHANNEL_UI", btnsFilter)
+      .subscribe(this.tohChannel$SendBtnClickEvent.bind(this));
+
+    this.getChannel("CHANNEL_UI", searchKeyFilter)
       .subscribe(this.tohChannel$SendBtnClickEvent.bind(this));
 
     this.getChannel("CHANNEL_ROUTE")
